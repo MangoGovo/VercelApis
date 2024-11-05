@@ -33,6 +33,7 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 
 	// 生成范围 [a, b] 内的随机数
 	randomNumber := rand.Intn(data.Avatar.Counts) + 1
-	fmt.Fprintf(w, "https://static.mggo.xyz/avatar/%d.png", randomNumber)
-
+	redirect := fmt.Sprintf("https://static.mggo.xyz/avatar/%d.png", randomNumber)
+	w.Header().Set("Location", redirect)
+	w.WriteHeader(http.StatusFound)
 }
